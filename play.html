@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title>Parchmap - Interactive Fiction</title>
+
+		<meta charset="utf-8">
+		<meta name="description" content="Parchmap is a free program that allows you to play interactive fiction stories, also known as text adventure games, and offers some quality of life improvements such as automatic mapping, note taking, quick navigation, and auto complete.">
+		<meta name="keywords" content="interactive, fiction, parchmap, parchment, zork, play, free, map, automap, navigation, autocomplete, notes, easy">
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+
+        <meta property="og:description" content="Parchmap is a free program that allows you to play interactive fiction stories, also known as text adventure games, and offers some quality of life improvements such as automatic mapping, note taking, quick navigation, and auto complete.">
+        <meta property="og:title" content="Parchmap - interactive fiction">
+        <meta property="og:url" content="http://parchmap.atspace.cc">
+        <meta property="og:image" content="http://parchmap.atspace.cc/img/favicon.png">
+        <meta property="og:type" content="website">
+
+		<link rel="stylesheet" href="css/parchment.css">
+		<link rel="stylesheet" href="css/Parchmap.css">
+		
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-180x180.png" />
+		
+		<script src="js/Global.js"></script>
+		<script src="js/Consts.js"></script>
+
+		<script src="lib/jquery.min.js"></script>
+		<script src="lib/main.js"></script>
+		<script src="lib/ie.js" nomodule></script>
+    	<script src="lib/resourcemap.js"></script> 
+
+		<script src="js/Input.js"></script>
+		<script src="js/GameList.js"></script>
+		<script src="js/Map.js"></script>
+		<script src="js/Directions.js"></script>
+		<script src="js/Message.js"></script>
+		<script src="js/Navigator.js"></script>
+		<script src="js/Autocomplete.js"></script>
+		<script src="js/Parchmap.js"></script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JV2214CFPQ"></script>
+
+		<script>
+
+			if (GA_TRACK) {
+
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', 'G-JV2214CFPQ', { app_name: APPNAME, app_version: BUILD });
+			}
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+		<!-- http://iplayif.com/lib/ -->
+		<!-- http://parchment.toolness.com/if-archive/games/zcode/ -->
+		<!-- https://ifarchive.org/indexes/if-archiveXgamesXzcode.html -->
+		<!-- https://iplayif.com/tools/zcode2js.html -->
+		<!-- &vm=zvm -->
+
+		<div id="windowport">
+            <noscript>
+                <p>You'll need to turn on Javascript in your web browser to play this game.</p>
+            </noscript>
+        </div>
+
+        <div id="loadingpane">
+			<div>
+				Loading...
+			</div>
+        </div>
+
+        <div id="errorpane" style="display:none;"><div id="errorcontent">...</div></div> 
+
+		<div id="exits"></div>
+
+		<div id="parchment"></div>
+
+		<div id="current-room-notes" class="icon"></div>
+
+		<div id="autocomplete"></div>
+
+		<div id="message" class="crt">
+
+			<h2></h2>
+
+			<div></div>
+
+			<span id="close" title="Close message">x</span>
+
+			<footer>Type any letter to close this message.</footer>
+
+		</div>
+
+		<div id="map" data-simplebar>
+
+			<h1></h1>
+			<h2></h2>
+			<h3></h3>
+
+			<div id="rooms"></div>
+
+			<div id="rooms-list" data-simplebar>
+
+				<strong>Known rooms</strong>
+
+				<div id="container"></div>
+
+			</div>
+
+			<footer></footer>
+
+		</div>
+
+		<div id="control-panel">
+
+			<button class="inject" data-inject="save" title="Save the game state">
+				Save
+			</button>
+
+			<button class="inject" data-inject="restore" title="Restore a previously saved state">
+				Restore
+			</button>
+
+			<button title="Import\Export saved game and map data" id="import-export">
+				Import\Export
+			</button>
+
+			<button id="toggle-map-anim" class="toggle-button on hide-first" title="Toggle the map's cartoony drawing effect">
+				<div class="button-state"></div>
+				Map Animations
+			</button>
+
+			<button id="toggle-show-info" class="toggle-button on hide-first" title="Toggle whether the help screen comes up when starting a new game">
+				<div class="button-state"></div>
+				Show help at start
+			</button>
+
+			<button id="toggle-map-2way" class="toggle-button on hide-first" title="Toggle whether a room will be connected back to the room it was accessed from in the opposite direction">
+				<div class="button-state"></div>
+				Assume opposite room connection
+			</button>
+
+		</div>
+
+	</body>
+
+</html>

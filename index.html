@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+        <title>Parchmap - Interactive Fiction</title>
+
+        <meta charset="utf-8">
+        <meta name="description" content="Parchmap is a free program that allows you to play interactive fiction stories, also known as text adventure games, and offers some quality of life improvements such as automatic mapping, note taking, quick navigation, and auto complete.">
+        <meta name="keywords" content="interactive, fiction, parchmap, parchment, zork, play, free, map, automap, navigation, autocomplete, notes, easy">
+        <meta name="viewport" content="width=device-width,user-scalable=no">
+
+        <meta property="og:description" content="Parchmap is a free program that allows you to play interactive fiction stories, also known as text adventure games, and offers some quality of life improvements such as automatic mapping, note taking, quick navigation, and auto complete.">
+        <meta property="og:title" content="Parchmap - interactive fiction">
+        <meta property="og:url" content="http://parchmap.atspace.cc">
+        <meta property="og:image" content="http://parchmap.atspace.cc/img/favicon.png">
+        <meta property="og:type" content="website">
+
+        <link rel="stylesheet" href="css/parchment.css">
+		<link rel="stylesheet" href="css/Parchmap.css">
+
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="img/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="img/apple-touch-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon-180x180.png" />
+
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/jquery.slimscroll.min.js"></script>
+        <script src="js/Global.js"></script>
+        <script src="js/Consts.js"></script>
+        <script src="js/Input.js"></script>
+        <script src="js/Message.js"></script>
+        <script src="js/GameList.js"></script>
+        <script src="js/MainMenu.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JV2214CFPQ"></script>
+
+		<script>
+
+            if (GA_TRACK) {
+
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-JV2214CFPQ', { app_name: APPNAME, app_version: BUILD });
+            }
+
+		</script>
+
+    </head>
+
+    <body class="main-menu">
+        
+        <!-- http://iplayif.com/lib/ -->
+        <!-- http://parchment.toolness.com/if-archive/games/zcode/ -->
+        <!-- https://ifarchive.org/indexes/if-archiveXgamesXzcode.html -->
+        <!-- https://iplayif.com/tools/zcode2js.html -->
+        <!-- &vm=zvm -->
+
+        <div id="windowport" class="oldschool" data-simplebar>
+
+            <div class="status TextGrid">
+
+                <div id="toolbar">
+                    <div id="filter-options">
+                        <div class="icon icon-fav-on" data-filter="fav" title="Show only starred"></div>
+                        <div class="icon icon-done-off" data-filter="done-off" title="Show only unfinished"></div>
+                        <div class="icon icon-done-on" data-filter="done-on" title="Show only finished"></div>
+                    </div>
+                    <div id="import" class="icon icon-import" title="Import your own story"></div>
+                    <div id="toggle-theme" class="icon icon-theme" title="Toggle dark\light theme"></div>
+                </div>
+                
+                <tt class="zvm-fg-2" id="listing-stories">
+                    Select a story
+                </tt>
+
+                <div>
+                    <input type="text" id="filter" placeholder="Title or Author">
+                </div>
+
+            </div>
+
+            <br>
+
+            <div id="games-list">
+
+            </div>
+
+            <div id="show-all" data-filter="all">
+
+                The story list has been filtered, <u>show all stories</u>
+
+            </div>
+
+        </div>
+
+        <div id="map" data-simplebar>
+
+            <div id="no-mobile">
+
+                <img src="img/icon-no-mobile.svg"> <span>Desktop PC recommended</span>
+
+            </div>
+
+            <h1>Parchmap</h1>
+            <h2>By Roy Lazarovich</h2>
+
+            <p>
+                Parchmap is an awesome program built around the <i>Parchment</i> interactive fiction interpreter that offers some quality of life improvements such as automatic mapping, note taking, quick navigation to known rooms, and auto complete.
+            </p>
+
+            <u>
+                Key features
+            </u>
+
+            <ul>
+                <li>
+                    <strong>Auto mapping</strong> - Parchmap automatically builds a map of the game world as you explore it.
+
+                    <br><br>
+                    Type <span class="code">/clear map</span> to erase the map and start a new one starting from the room you're in.
+                </li>
+                <li>
+                    <strong>Note taking</strong> - Parchmap allows you to easily add notes to remind you of tasks and interesting things in the room, these notes will appear on the map.
+
+                    <br><br>
+                    Type <span class="code">/note locked door, look for a key;</span> to add this note to the current room.
+                    <br><br>
+                    Type <span class="code">/clear notes</span> to erase all the notes in the current room.
+                </li>
+                <li>
+                    <strong>Auto navigation</strong> - Parchmap will even calculate a route from the room you're in to a target room (if it can) based on the current state of the map.
+
+                    <br><br>
+                    Type <span class="code">/goto kitchen;</span> to have Parchment calculate a route from the room you're in to the kitchen and inject the instructions into the input line.
+                </li>
+                <li>
+                    <strong>Auto complete</strong> - Parchmap keeps a list of words that it find in the story and will help you type less, it will even suggest room names when you use special commands that accept room names as parameters such as <span class="code">/goto</span> and <span class="code">/room-notes</span>.
+                </li>
+            </ul>
+            
+            <p>
+                To the left, on the computer screen, you can find a huge list of supported interactive fiction stories, click any of them to start playing.
+            </p>
+
+            <footer></footer>
+
+        </div>
+
+        <div id="message" class="crt">
+
+			<h2></h2>
+
+			<div></div>
+
+			<span id="close" title="Close message">x</span>
+
+		</div>
+
+    </body>
+
+</html>
