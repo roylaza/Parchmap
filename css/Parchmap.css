@@ -29,6 +29,10 @@ button
 	font-size: 12px;
 }
 
+body.map-open #exits {
+	display: none;
+}
+
 body.light #exits
 {
 	color: #1E1E1E;
@@ -226,18 +230,25 @@ body.light #map ::-moz-selection
 
     overflow-y: auto;
     overflow-x: hidden;
+
+	transition: width 0.3s;
+}
+
+body.map-open #parchment, body.map-open #windowport 
+{
+	width: calc(50vw - 40px) !important;
 }
 
 #map
 {
 	position: fixed;
-	top: 100%;
-	left: 0;
-	width: 100%;
+	top: 0px;
+	left: 100%;
+	width: 50%;
 	height: 100%;
 	z-index: 4;
 
-	display: none;
+	/* display: none; */
 
 	text-align: center;
 
@@ -248,6 +259,13 @@ body.light #map ::-moz-selection
 
 	padding: 0px 10px;
     box-sizing: border-box;
+
+	transition: all 0.3s;
+}
+
+body.map-open #map
+{
+	left: 50%;
 }
 
 body.light #map
@@ -718,7 +736,7 @@ body.light #map h1
 
 #map footer
 {
-	position: fixed;
+	position: absolute;
 	bottom: 5px;
 	right: 5px;
 }
@@ -1513,6 +1531,23 @@ body.main-menu ::-webkit-scrollbar-thumb
 	#map
 	{
 		font-size: 70%;
+		left: 100%;
+	}
+
+	body.map-open #map
+	{
+		width: 100% !important;
+		left: 0% !important;
+	}
+
+	body.main-menu.map-open #parchment, body.main-menu.map-open #windowport	
+	{
+		width: calc(100vw - 40px) !important;
+	}
+
+	.main-menu #map 
+	{
+		display: none;
 	}
 
 	#map #rooms-list #container > div .name
