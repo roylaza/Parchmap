@@ -102,7 +102,7 @@ var Map = {
         if (route) {
             
             Input.Inject(route, true);
-            Map.Hide();
+            if ($(window).width() < 850) Map.Toggle();
         }
     },
 
