@@ -1530,6 +1530,7 @@ body.main-menu ::-webkit-scrollbar-thumb
 
 	#map
 	{
+		position: fixed;
 		font-size: 70%;
 		left: 100%;
 	}
@@ -1541,6 +1542,11 @@ body.main-menu ::-webkit-scrollbar-thumb
 	}
 
 	body.main-menu.map-open #parchment, body.main-menu.map-open #windowport	
+	{
+		width: calc(100vw - 40px) !important;
+	}
+
+	body.map-open #parchment, body.map-open #windowport 
 	{
 		width: calc(100vw - 40px) !important;
 	}
