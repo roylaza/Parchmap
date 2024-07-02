@@ -20,30 +20,13 @@ var Map = {
         Map.CreateMiniMap("vertical right", ["up", "e", "down"]);
 
         $("#current-room-notes").click(() => Map.ShowNotes(null, Map.CurrentRoom));
+
+        if ($(window).width() >= 850) Map.Toggle();
     },
 
     Toggle: () => {
 
-        if (Map.Visible)
-            Map.Hide();
-        else
-            Map.Show();
-    },
-
-    Show: () => {
-
-        if (Map.Visible) return;
-
-        Map.Visible = true;
-        $("#map").show().css({ top: "100%" }).animate({ top: "0%" }, "fast");
-    },
-
-    Hide: () => {
-
-        if (!Map.Visible) return;
-
-        Map.Visible = false;
-        $("#map").animate({ top: "100%"}, "fast", () => $("#map").hide());
+        $("body").toggleClass("map-open");
     },
 
     CreateRooms: (rooms) => {
