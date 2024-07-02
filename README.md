@@ -1,0 +1,1 @@
+Parchmap is a free program that allows you to play interactive fiction stories, also known as text adventure games, and offers some quality of life improvements such as automatic mapping, note taking, quick navigation, and auto complete.
