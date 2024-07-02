@@ -349,6 +349,7 @@ body.light #windowport .simplebar-scrollbar:before, body.light #message .simpleb
 
 #autocomplete
 {
+	display: none;
 	position: fixed;
     bottom: 0;
     left: 0;

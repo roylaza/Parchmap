@@ -3,7 +3,7 @@ var Input = {
     KeyboardNavigation: {
 
         n: "/ or *",
-        s: "Del",
+        s: "Numeric keypad 5",
         w: "Left Arrow",
         e: "Right Arrow",
         ne: "PageUp",
@@ -41,21 +41,23 @@ var Input = {
 
     KeyPressed: (e) => {
 
+        if (e.key != "Tab") Autocomplete.CurrentToggleWord = "";
+
         if (Message.IsOpen && !Message.NoTypeToClose) {
             
             Message.Hide();
             setTimeout(() => Input.Clear(), 100);
         }
 
-        if (e.shiftKey) {
+        if (e.shiftKey && e.ctrlKey) {
 
             switch(e.key) {
 
                 case "/": Input.Clear(); Input.Inject("n", true); break;
                 case "*": Input.Clear(); Input.Inject("n", true); break;
+                case "Clear": Input.Clear(); Input.Inject("s", true); break;
                 case "ArrowUp": Input.Clear(); Input.Inject("n", true); break;
                 case "ArrowDown": Input.Clear(); Input.Inject("s", true); break;
-                case "Delete": Input.Clear(); Input.Inject("s", true); break;
                 case "ArrowLeft": Input.Clear(); Input.Inject("w", true); break;
                 case "ArrowRight": Input.Clear(); Input.Inject("e", true); break;
                 case "PageUp": Input.Clear(); Input.Inject("ne", true); break;
@@ -67,6 +69,17 @@ var Input = {
         else {
             
             switch(e.key) {
+
+                case "Tab":
+
+                    e.preventDefault();
+
+                    if (Input.Value().length > 0) {
+
+                        Autocomplete.ToggleSuggestions(Input.Value());
+                    }
+
+                break;
                 
                 case "`": 
                 
@@ -115,7 +128,11 @@ var Input = {
     SpecialCommandDetected: (text) => {
 
         Input.Clear();
-        Global.TrackEvent("entered_command", { command: text });
+    },
+
+    GetAllRoomCommands: () => {
+
+        return [ "/goto","/room-notes", "/see" ].sort();
     },
 
     GetAllSpecialCommands: () => {

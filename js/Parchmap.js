@@ -23,6 +23,12 @@ var Parchmap = {
 
         $(window).resize(Parchmap.UpdateUI);
 
+        $("a").each(function() { 
+            if ($(this).attr("title") && $(this).attr("title").includes("000webhost.com")) {
+                $(this).parent().remove();
+            }
+        });
+
         /*
         var saveHash = localStorage.getItem("PM_Save_" + Parchmap.GameFilename);
         if (saveHash) location.hash = saveHash;

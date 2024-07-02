@@ -22,6 +22,12 @@ var MainMenu = {
 
             Message.Show("A wild error has appeared!", "Looks like something went wrong, here is what we know:<br><br>" + error);
         };
+
+        $("a").each(function() { 
+            if ($(this).attr("title") && $(this).attr("title").includes("000webhost.com")) {
+                $(this).parent().remove();
+            }
+        });
     },
 
     SetupUI: () => {

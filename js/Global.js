@@ -43,18 +43,6 @@ var Global = {
         Global.SavePrefs();
     },
 
-    TrackEvent: (name, params) => {
-
-        if (!GA_TRACK) return;
-
-        if (params)
-            gtag('event', name, params);
-        else
-            gtag('event', name);
-
-        // $.post("log.php", { text: name + ": " + JSON.stringify(params) });
-    },
-
     GetUrlParameter: (name, url) => {
 
         if (!url) url = window.location.href;

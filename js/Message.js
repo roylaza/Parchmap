@@ -61,7 +61,7 @@ var Message = {
         var title = "Welcome to " + APPNAME;
         var body = "";
 
-        body += "<a class='watch-video' href='https://youtu.be/xB-8oJiFzEs' target='_blank'><div>Watch Video</div></a>";
+        body += "<a class='watch-video' href='https://www.youtube.com/watch?v=-cQ6FjG2_IQ' target='_blank'><div>Watch Video</div></a>";
         body += "<p>" + APPNAME + " is an awesome program built around the <i>Parchment</i> interactive fiction interpreter that offers some quality of life improvements such as automatic mapping, note taking, quick navigation to known rooms, and auto complete.</p>";
 
         body += "<p>Here is a list of special commands you can type at the prompt, simply type the command without pressing Enter, " + APPNAME + " is always watching the prompt and will pick it up.</p>";
@@ -70,6 +70,8 @@ var Message = {
         body += "<li>Type <span class='code'>/help</span> to show this screen again.</li>";
         body += "<li>Type <span class='code'>/map</span> (or press `) to show the map, press Escape or ` to hide the map.</li>";
         body += "<li>Type <span class='code'>/clear map</span> to erase the map and start over starting from the room you're in.</li>";
+        body += "<li>Press <span class='code'>Tab</span> to complete the word you're typing using similar words from the story, keep pressing Tab to cycle through other relevant words.</li>";
+        body += "<ul><li>When you type special commands that accept room names as parameters (such as /goto and /room-notes) you'll get room names as suggestions.</li></ul>";
         body += "<li>Type <span class='code' title='Example: /note locked room here;'>/note [text];</span> (note the semi-colon) to add a note about something important or interesting in the room.</li>";
         body += "<li>Type <span class='code'>/notes</span> to read all the notes you kept in the room you're in.</li>";
         body += "<ul><li>Type <span class='code' title='Example: /room-notes the kitchen;'>/room-notes [room name];</span> (note the semi-colon) to read all the notes in a different room.</li></ul>";
@@ -77,14 +79,10 @@ var Message = {
         body += "<li>Type <span class='code' title='Example: /goto the kitchen;'>/goto [room name];</span> (note the semi-colon) to have " + APPNAME + " automatically navigate you to a known room using an incredibly smart (not really) algorithm.</li>";
         body += "<li>Type <span class='code' title='Example: /see the kitchen;'>/see [room name];</span> (note the semi-colon) to center the map on a particular room.</li>"; 
         body += "<ul><li>Type <span class='code'>/see me;</span> (note the semi-colon) to center the map back on the room you're in.</li></ul>"; 
+        body += "<li>Press <span class='code'>Ctrl+Shift</span> + one of the keys on the numeric keypad to inject directions, substitute <span class='code'>/</span> or <span class='code'>*</span> for the up arrow and <span class='code'>numeric keypad 5</span> for the down arrow (Parchment captures the up and down keys).</li>";
         body += "<li>Type <span class='code'>/theme</span> to toggle between light and dark color themes.</li>";
-        body += "<li>Type <span class='code'>/quit</span> to go back to the games list.</li>";
         body += "<li>Enter <span class='code'>save</span> or <span class='code'>restore</span> to save or restore your game.</li>";
-        body += "<li>Start typing to see auto complete suggestions. When you type special commands that accept room names as parameters (such as /goto and /room-notes) you'll get room names as suggestions.</li>";
-        body += "<ul><li>Click a suggestion to inject it into the prompt.</li>";
-        body += "<li>Ctrl+click to inject it and automatically hit Enter.</li>";
-        body += "<li>If there is exactly one suggestion, type \\ to inject it and hit Enter, and / to inject it without Enter.</li></ul>";
-        body += "<li>Press <span class='code'>Shift</span> + one of the keys on the numeric keypad to inject directions, substitute <span class='code'>/</span> or <span class='code'>*</span> for the up arrow and <span class='code'>Del</span> for the down arrow.</li>";
+        body += "<li>Type <span class='code'>/quit</span> to go back to the games list.</li>";
         body += "</ul>";
 
         if (Global.Prefs.ShowInfoOnStart) {

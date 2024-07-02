@@ -2,6 +2,7 @@ var Autocomplete = {
 
     Words: [],
     CurrentWord: "",
+    CurrentToggleWord: "",
     Strip: [ "\n", ")", "(", "\"", "'", ",", ".", "!", "?", ";" ],
 
     UpdateWords: () => {
@@ -30,6 +31,45 @@ var Autocomplete = {
                 }
             });
         });
+    },
+
+    ToggleSuggestions: (text) => {
+
+        text = text.trim();
+        var wordsInInput = text.split(" ");
+
+        if (Autocomplete.CurrentToggleWord == "") {
+
+            Autocomplete.CurrentToggleWord = wordsInInput[wordsInInput.length - 1];
+        }
+
+        var collection = Autocomplete.Words;
+
+        if (text.indexOf("/goto") == 0 || text.indexOf("/room-notes") == 0 || text.indexOf("/see") == 0) {
+
+            collection = [];
+            Map.Rooms.forEach(r => collection.push(r.Name));
+        }
+
+        var list = Autocomplete.GetSuggestions(Autocomplete.CurrentToggleWord, collection);
+
+        if (list.length == 0) return;
+
+        var pos = list.indexOf(wordsInInput[wordsInInput.length - 1]);
+        pos++;
+
+        if (pos >= list.length) pos = 0;
+
+        var str = "";
+
+        for (var i = 0; i < wordsInInput.length - 1; i++) {
+            str += wordsInInput[i] + " ";
+        }
+
+        str += list[pos] + " "
+
+        Input.Clear();
+        Input.Inject(str);
     },
 
     Suggest: (text) => {
@@ -128,8 +168,6 @@ var Autocomplete = {
                 }
             }
         }
-
-        Global.TrackEvent("used_autocomplete", { word: word });
     },
 
     WordClicked: function(e) {
