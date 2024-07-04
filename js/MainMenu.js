@@ -112,28 +112,12 @@ var MainMenu = {
     StarStory: function() {
 
         $(this).toggleClass("on");
-
-        if ($(this).hasClass("on")) {
-
-            var title = $(this).parent().find(".title").text();
-            
-            if (title) Global.TrackEvent("story_starred", { story: title });
-        }
-
         MainMenu.SaveGameFlags();
     },
 
     DoneStory: function() {
 
         $(this).toggleClass("on");
-
-        if ($(this).hasClass("on")) {
-
-            var title = $(this).parent().find(".title").text();
-            
-            if (title) Global.TrackEvent("story_completed", { story: title });
-        }
-
         MainMenu.SaveGameFlags();
     },
 
@@ -247,8 +231,6 @@ var MainMenu = {
             const data = new Uint8Array(await file.arrayBuffer())
             const textdata = Array.from(data).map(x => String.fromCharCode(x)).join('')
             const result = `processBase64Zcode('${btoa(textdata)}')`;
-
-            Global.TrackEvent("story_imported", { filename: file.name });
 
             $.post("upload.php", { filename: filename, extension: extension, data: result }, (filename) => {
 
