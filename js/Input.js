@@ -164,7 +164,7 @@ var Input = {
             if (text.toLowerCase() == "/map") {
 
                 Input.SpecialCommandDetected(text);
-                Map.Show();
+                Map.Toggle();
             }
             else if (text.toLowerCase() == "/clear map") {
 
