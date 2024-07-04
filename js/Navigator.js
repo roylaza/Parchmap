@@ -126,8 +126,6 @@ var Navigator = {
         if (shortestRoute.length == 0) {
 
             Message.Show("No way!", `I've tried to find a way to get to <u>${targetRoom.Name}</u> from <u>${originRoom.Name}</u> but couldn't find a valid route, this probably means that one of the rooms is in a different, unconnected region in the game or that the map is not yet complete.`);
-
-            Global.TrackEvent("used_navigator", { success: false });
         }
         else {
 
@@ -141,12 +139,6 @@ var Navigator = {
                 if (Map.CurrentRoom != targetRoom.Name) {
     
                     Message.Show("Oh, boy!", `It appears you didn't end up where you wanted to be. This can happen if the game changes the state of one or more exits (which ${APPNAME} can't be aware of), for instance a room gets locked up or something (or someone) blocks you from moving in or out of a room. Refer to the story text to see what's holding you back and try again.`);
-    
-                    Global.TrackEvent("used_navigator", { success: true, reached_goal: false });
-                }
-                else {
-    
-                    Global.TrackEvent("used_navigator", { success: true, reached_goal: true });
                 }
             
             }, 300);
