@@ -330,8 +330,6 @@ var Map = {
         Map.Save();
         Map.Draw();
         Map.RebuildRoomsList();
-
-        Global.TrackEvent("added_note", { note: note });
     },
 
     ClearNotes: () => {
