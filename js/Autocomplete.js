@@ -7,7 +7,7 @@ var Autocomplete = {
 
     UpdateWords: () => {
 
-        // Get the 100 most recent words
+        // Get the 1000 most recent words
         Autocomplete.Words = [];
 
         $("#windowport .BufferWindow .BufferLine").each(function() {
@@ -25,7 +25,7 @@ var Autocomplete = {
     
                 word = word.trim();
     
-                if (Autocomplete.Words.length < 100 && word.length > 1) {
+                if (Autocomplete.Words.length < 1000 && word.length > 1) {
     
                     if (!Autocomplete.Words.find(e => e.toLowerCase() == word.toLowerCase())) Autocomplete.Words.push(word);
                 }

@@ -29,6 +29,16 @@ var Map = {
         $("body").toggleClass("map-open");
     },
 
+    Show: () => {
+
+        $("body").addClass("map-open");
+    },
+
+    Hide: () => {
+
+        $("body").removeClass("map-open");
+    },
+
     CreateRooms: (rooms) => {
 
         var row = $("<div>").appendTo("#map #rooms");
@@ -320,8 +330,6 @@ var Map = {
         Map.Save();
         Map.Draw();
         Map.RebuildRoomsList();
-
-        Global.TrackEvent("added_note", { note: note });
     },
 
     ClearNotes: () => {
