@@ -79,7 +79,7 @@ var Input = {
                         Autocomplete.ToggleSuggestions(Input.Value());
                     }
 
-                break;
+                    break;
                 
                 case "`": 
                 
@@ -87,14 +87,20 @@ var Input = {
 
                         if (Input.Value().length == 1) {
     
-                            Input.Clear(); Map.Toggle(); 
+                            Input.Clear(); 
+                            Map.Toggle(); 
                         }
 
                     }, 100);
 
-                break;
+                    break;
 
-                case "Escape": Input.Clear(); Map.Hide(); break;
+                case "Escape": 
+                
+                    Input.Clear(); 
+                    Map.Hide(); 
+                    
+                    break;
             }
         }
     },
